@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>বাংলাদেশের সংবাদপত্র ডিরেক্টরি | All Bangladeshi Newspapers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #006a4e;
+            --secondary-color: #f42a41;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --success-color: #28a745;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'SolaimanLipi', 'Siyam Rupali', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #ffcc00;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1585829365295-ab7cd400d7e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            margin-bottom: 30px;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+        }
+        
+        /* Newspaper Categories */
+        .categories {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            color: var(--primary-color);
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            margin: 10px auto;
+        }
+        
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .tab-btn {
+            padding: 8px 20px;
+            margin: 5px;
+            background-color: #ddd;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tab-btn.active, .tab-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .newspaper-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .newspaper-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .newspaper-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .newspaper-img {
+            height: 120px;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .newspaper-img img {
+            max-width: 80%;
+            max-height: 80%;
+            object-fit: contain;
+        }
+        
+        .newspaper-info {
+            padding: 15px;
+        }
+        
+        .newspaper-info h3 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .newspaper-info p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .visit-btn {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        
+        .visit-btn:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        .developer-credit {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 15px;
+            color: #ccc;
+        }
+
+        .developer-credit a {
+            color: #4dabf7;
+            text-decoration: none;
+        }
+
+        .developer-credit a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .newspaper-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                বাংলাদেশ <span>সংবাদপত্র</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">হোম</a></li>
+                    <li><a href="#">সংবাদপত্র</a></li>
+                    <li><a href="#">টেলিভিশন</a></li>
+                    <li><a href="#">রেডিও</a></li>
+                    <li><a href="#">যোগাযোগ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>বাংলাদেশের সকল সংবাদপত্র এক ঠিকানায়</h1>
+            <p>দৈনিক, সাপ্তাহিক, অনলাইন এবং আন্তর্জাতিক সংবাদপত্রগুলির সরাসরি লিংক</p>
+            <div class="search-box">
+                <input type="text" placeholder="সংবাদপত্র খুঁজুন...">
+            </div>
+        </div>
+    </section>
+
+    <!-- Newspaper Categories -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">বাংলাদেশের সংবাদপত্রসমূহ</h2>
+            
+            <div class="category-tabs">
+                <button class="tab-btn active" data-category="all">সকল</button>
+                <button class="tab-btn" data-category="daily">দৈনিক</button>
+                <button class="tab-btn" data-category="online">অনলাইন</button>
+                <button class="tab-btn" data-category="weekly">সাপ্তাহিক</button>
+                <button class="tab-btn" data-category="international">আন্তর্জাতিক</button>
+            </div>
+            
+            <div class="newspaper-grid">
+                <!-- Daily Newspapers -->
+                <div class="newspaper-card" data-category="daily">
+                    <div class="newspaper-img">
+                        <img src="https://www.prothomalo.com/favicon.ico" alt="প্রথম আলো">
+                    </div>
+                    <div class="newspaper-info">
+                        <h3>প্রথম আলো</h3>
+                        <p>বাংলাদেশের শীর্ষ দৈনিক পত্রিকা</p>
+                        <a href="https://www.prothomalo.com/" class="visit-btn" target="_blank">ভিজিট করুন</a>
+                    </div>
+                </div>
+                
+                <div class="newspaper-card" data-category="daily">
+                    <div class="newspaper-img">
+                        <img src="https://www.thedailystar.net/sites/all/themes/tds/favicon.ico" alt="দ্য ডেইলি স্টার">
+                    </div>
+                    <div class="newspaper-info">
+                        <h3>দ্য ডেইলি স্টার</h3>
+                        <p>বাংলাদেশের প্রাচীন ইংরেজি দৈনিক</p>
+                        <a href="https://www.thedailystar.net/" class="visit-btn" target="_blank">ভিজিট করুন</a>
+                    </div>
+                </div>
+                
+                <div class="newspaper-card" data-category="daily">
+                    <div class="newspaper-img">
+                        <img src="https://www.jugantor.com/favicon.ico" alt="যুগান্তর">
+                    </div>
+                    <div class="newspaper-info">
+                        <h3>যুগান্তর</h3>
+                        <p>জনপ্রিয় বাংলা দৈনিক</p>
+                        <a href="https://www.jugantor.com/" class="visit-btn" target="_blank">ভিজিট করুন</a>
+                    </div>
+                </div>
+                
+                <div class="newspaper-card" data-category="daily">
+                    <div class="newspaper-img">
+                        <img src="https://www.kalerkantho.com/favicon.ico" alt="কালের কণ্ঠ">
+                    </div>
+                    <div class="newspaper-info">
+                        <h3>কালের কণ্ঠ</h3>
+                        <p>বাংলাদেশের অন্যতম প্রধান দৈনিক</p>
+                        <a href="https://www.kalerkantho.com/" class="visit-btn" target="_blank">ভিজিট করুন</a>
+                    </div>
+                </div>
+                
+                <div class="newspaper-card" data-category="daily">
+                    <div class="newspaper-img">
+                        <img src="https://www.dailyinqilab.com/favicon.ico" alt="দৈনিক ইনকিলাব">
+                    </div>
+                    <div class="newspaper-info">
+                        <h3>দৈনিক ইনকিলাব</h3>
+                        <p>বাংলাদেশের প্রভাবশালী দৈনিক</p>
+                        <a href="https://www.dailyinqilab.com/" class="visit-btn" target="_blank">ভিজিট করুন</a>
+                    </div>
+                </div>
+                
+                <div class="newspaper-card" data-category="daily">
+                    <div class="newspaper-img">
+                        <img src="https://www.dailynayadiganta.com/favicon.ico" alt="দৈনিক নয়াডিগন্ট">
+                    </div>
+                    <div class="newspaper-info">
+                        <h3>দৈনিক নয়াডিগন্ট</h3>
+                        <p>জনপ্রিয় বাংলা দৈনিক</p>
+                        <a href="https://www.dailynayadiganta.com/" class="visit-btn" target="_blank">ভিজিট করুন</a>
+                    </div>
+                </div>
+                
+                <div class="newspaper-card" data-category="daily">
+                    <div class="newspaper-img">
+                        <img src="https://www.bd-journal.com/favicon.ico" alt="বাংলাদেশ জার্নাল">
+                    </div>
+                    <div class="newspaper-info">
+                        <h3>বাংলাদেশ জার্নাল</h3>
+                        <p>বাংলাদেশের প্রভাবশালী দৈনিক</p>
+                        <a href="https://www.bd-journal.com/" class="visit-btn" target="_blank">ভিজিট করুন</a>
+                    </div>
+                </div>
+                
+                <div class="newspaper-card" data-category="daily">
+                    <div class="newspaper-img">
+                        <img src="https://www.dainikamadershomoy.com/favicon.ico" alt="দৈনিক আমাদের সময়">
+                    </div>
+                    <div class="newspaper-info">
+                        <h3>দৈনিক আমাদের সময়</h3>
+                        <p>জনপ্রিয় বাংলা দৈনিক</p>
+                        <a href="https://www.dainikamadershomoy.com/" class="visit-btn" target="_blank">ভিজিট করুন</a>
+                    </div>
+                </div>
+                
+                <!-- Online Newspapers -->
+                <div class="newspaper-card" data-category="online">
+                    <div class="newspaper-img">
+                        <img src="https://www.bdnews24.com/favicon.ico" alt="বিডিনিউজ টোয়েন্টিফোর">
+                    </div>
+                    <div class="newspaper-info">
+                        <h3>বিডিনিউজ টোয়েন্টিফোর</h3>
+                        <p>বাংলাদেশের শীর্ষ অনলাইন নিউজ পোর্টাল</p>
+                        <a href="https://www.bdnews24.com/" class="visit-btn" target="_blank">ভিজিট করুন</a>
+                    </div>
+                </div>
+                
+                <div class="newspaper-card" data-category="online">
+                    <div class="newspaper-img">
+                        <img src="https://www.jagonews24.com/favicon.ico" alt="জাগোনিউজ২৪">
+                    </div>
+                    <div class="newspaper-info">
+                        <h3>জাগোনিউজ২৪</h3>
+                        <p>২৪ ঘণ্টার অনলাইন নিউজ পোর্টাল</p>
+                        <a href="https://www.jagonews24.com/" class="visit-btn" target="_blank">ভিজিট করুন</a>
+                    </div>
+                </div>
+                
+                <div class="newspaper-card" data-category="online">
+                    <div class="newspaper-img">
+                        <img src="https://www.somoynews.tv/favicon.ico" alt="সময় টিভি">
+                    </div>
+                    <div class="newspaper-info">
+                        <h3>সময় টিভি</h3>
+                        <p>অনলাইন নিউজ পোর্টাল</p>
+                        <a href="https://www.somoynews.tv/" class="visit-btn" target="_blank">ভিজিট করুন</a>
+                    </div>
+                </div>
+                
+                <div class="newspaper-card" data-category="online">
+                    <div class="newspaper-img">
+                        <img src="https://www.risingbd.com/favicon.ico" alt="রাইজিংবিডি">
+                    </div>
+                    <div class="newspaper-info">
+                        <h3>রাইজিংবিডি</h3>
+                        <p>অনলাইন নিউজ পোর্টাল</p>
+                        <a href="https://www.risingbd.com/" class="visit-btn" target="_blank">ভিজিট করুন</a>
+                    </div>
+                </div>
+                
+                <div class="newspaper-card" data-category="online">
+                    <div class="newspaper-img">
+                        <img src="https://www.banglanews24.com/favicon.ico" alt="বাংলানিউজ২৪">
+                    </div>
+                    <div class="newspaper-info">
+                        <h3>বাংলানিউজ২৪</h3>
+                        <p>২৪ ঘণ্টার অনলাইন নিউজ পোর্টাল</p>
+                        <a href="https://www.banglanews24.com/" class="visit-btn" target="_blank">ভিজিট করুন</a>
+                    </div>
+                </div>
+                
+                <div class="newspaper-card" data-category="online">
+                    <div class="newspaper-img">
+                        <img src="https://www.dhakatimes24.com/favicon.ico" alt="ঢাকা টাইমস">
+                    </div>
+                    <div class="newspaper-info">
+                        <h3>ঢাকা টাইমস</h3>
+                        <p>অনলাইন নিউজ পোর্টাল</p>
+                        <a href="https://www.dhakatimes24.com/" class="visit-btn" target="_blank">ভিজিট করুন</a>
+                    </div>
+                </div>
+                
+                <!-- Weekly Newspapers -->
+                <div class="newspaper-card" data-category="weekly">
+                    <div class="newspaper-img">
+                        <img src="https://www.weeklyholiday.net/favicon.ico" alt="ওয়াকলি হলিডে">
+                    </div>
+                    <div class="newspaper-info">
+                        <h3>ওয়াকলি হলিডে</h3>
+                        <p>ইংরেজি সাপ্তাহিক পত্রিকা</p>
+                        <a href="https://www.weeklyholiday.net/" class="visit-btn" target="_blank">ভিজিট করুন</a>
+                    </div>
+                </div>
+                
+                <div class="newspaper-card" data-category="weekly">
+                    <div class="newspaper-img">
+                        <img src="https://www.robibar.com/favicon.ico" alt="রবিবার">
+                    </div>
+                    <div class="newspaper-info">
+                        <h3>রবিবার</h3>
+                        <p>সাপ্তাহিক পত্রিকা</p>
+                        <a href="https://www.robibar.com/" class="visit-btn" target="_blank">ভিজিট করুন</a>
+                    </div>
+                </div>
+                
+                <!-- International -->
+                <div class="newspaper-card" data-category="international">
+                    <div class="newspaper-img">
+                        <img src="https://www.thedailystar.net/sites/all/themes/tds/favicon.ico" alt="দ্য ডেইলি স্টার (আন্তর্জাতিক)">
+                    </div>
+                    <div class="newspaper-info">
+                        <h3>দ্য ডেইলি স্টার (আন্তর্জাতিক)</h3>
+                        <p>আন্তর্জাতিক সংস্করণ</p>
+                         <a href="https://www.thedailystar.net/international" class="visit-btn" target="_blank">ভিজিট করুন</a>
+                    </div>
+                </div>
+                
+                <!-- More Newspapers -->
+                <div class="newspaper-card" data-category="daily">
+                    <div class="newspaper-img">
+                        <img src="https://www.ittefaq.com.bd/favicon.ico" alt="দৈনিক ইত্তেফাক">
+                    </div>
+                    <div class="newspaper-info">
+                        <h3>দৈনিক ইত্তেফাক</h3>
+                        <p>বাংলাদেশের প্রাচীন দৈনিক</p>
+                        <a href="https://www.ittefaq.com.bd/" class="visit-btn" target="_blank">ভিজিট করুন</a>
+                    </div>
+                </div>
+                
+                <div class="newspaper-card" data-category="daily">
+                    <div class="newspaper-img">
+                        <img src="https://www.dainikazadi.org/favicon.ico" alt="দৈনিক আজাদী">
+                    </div>
+                    <div class="newspaper-info">
+                        <h3>দৈনিক আজাদী</h3>
+                        <p>চট্টগ্রামের প্রধান দৈনিক</p>
+                        <a href="https://www.dainikazadi.org/" class="visit-btn" target="_blank">ভিজিট করুন</a>
+                    </div>
+                </div>
+                
+                <div class="newspaper-card" data-category="daily">
+                    <div class="newspaper-img">
+                        <img src="https://www.dailysangram.com/favicon.ico" alt="দৈনিক সংগ্রাম">
+                    </div>
+                    <div class="newspaper-info">
+                        <h3>দৈনিক সংগ্রাম</h3>
+                        <p>বাংলাদেশের দৈনিক পত্রিকা</p>
+                        <a href="https://www.dailysangram.com/" class="visit-btn" target="_blank">ভিজিট করুন</a>
+                    </div>
+                </div>
+                
+                <div class="newspaper-card" data-category="daily">
+                    <div class="newspaper-img">
+                        <img src="https://www.dailyjanakantha.com/favicon.ico" alt="দৈনিক জনকণ্ঠ">
+                    </div>
+                    <div class="newspaper-info">
+                        <h3>দৈনিক জনকণ্ঠ</h3>
+                        <p>বাংলাদেশের দৈনিক পত্রিকা</p>
+                        <a href="https://www.dailyjanakantha.com/" class="visit-btn" target="_blank">ভিজিট করুন</a>
+                    </div>
+                </div>
+                
+                <div class="newspaper-card" data-category="online">
+                    <div class="newspaper-img">
+                        <img src="https://www.deshrupantor.com/favicon.ico" alt="দেশ রূপান্তর">
+                    </div>
+                    <div class="newspaper-info">
+                        <h3>দেশ রূপান্তর</h3>
+                        <p>অনলাইন নিউজ পোর্টাল</p>
+                        <a href="https://www.deshrupantor.com/" class="visit-btn" target="_blank">ভিজিট করুন</a>
+                    </div>
+                </div>
+                
+                <div class="newspaper-card" data-category="online">
+                    <div class="newspaper-img">
+                        <img src="https://www.barta24.com/favicon.ico" alt="বার্তা২৪">
+                    </div>
+                    <div class="newspaper-info">
+                        <h3>বার্তা২৪</h3>
+                        <p>অনলাইন নিউজ পোর্টাল</p>
+                        <a href="https://www.barta24.com/" class="visit-btn" target="_blank">ভিজিট করুন</a>
+                    </div>
+                </div>
+                
+                <div class="newspaper-card" data-category="online">
+                    <div class="newspaper-img">
+                        <img src="https://www.ntvbd.com/favicon.ico" alt="এনটিভি">
+                    </div>
+                    <div class="newspaper-info">
+                        <h3>এনটিভি</h3>
+                        <p>অনলাইন নিউজ পোর্টাল</p>
+                        <a href="https://www.ntvbd.com/" class="visit-btn" target="_blank">ভিজিট করুন</a>
+                    </div>
+                </div>
+                
+                <div class="newspaper-card" data-category="online">
+                    <div class="newspaper-img">
+                        <img src="https://www.channelionline.com/favicon.ico" alt="চ্যানেল আই">
+                    </div>
+                    <div class="newspaper-info">
+                        <h3>চ্যানেল আই</h3>
+                        <p>অনলাইন নিউজ পোর্টাল</p>
+                        <a href="https://www.channelionline.com/" class="visit-btn" target="_blank">ভিজিট করুন</a>
+                    </div>
+                </div>
+                
+                <div class="newspaper-card" data-category="online">
+                    <div class="newspaper-img">
+                        <img src="https://www.dailysun.com/favicon.ico" alt="দ্য ডেইলি সান">
+                    </div>
+                    <div class="newspaper-info">
+                        <h3>দ্য ডেইলি সান</h3>
+                        <p>ইংরেজি অনলাইন নিউজ পোর্টাল</p>
+                        <a href="https://www.dailysun.com/" class="visit-btn" target="_blank">ভিজিট করুন</a>
+                    </div>
+                </div>
+                
+                <div class="newspaper-card" data-category="online">
+                    <div class="newspaper-img">
+                        <img src="https://www.newagebd.net/favicon.ico" alt="নিউ এইজ">
+                    </div>
+                    <div class="newspaper-info">
+                        <h3>নিউ এইজ</h3>
+                        <p>ইংরেজি অনলাইন নিউজ পোর্টাল</p>
+                        <a href="https://www.newagebd.net/" class="visit-btn" target="_blank">ভিজিট করুন</a>
+                    </div>
+                </div>
+                
+                <div class="newspaper-card" data-category="online">
+                    <div class="newspaper-img">
+                        <img src="https://www.bssnews.net/favicon.ico" alt="বিএসএস নিউজ">
+                    </div>
+                    <div class="newspaper-info">
+                        <h3>বিএসএস নিউজ</h3>
+                        <p>অনলাইন নিউজ পোর্টাল</p>
+                        <a href="https://www.bssnews.net/" class="visit-btn" target="_blank">ভিজিট করুন</a>
+                    </div>
+                </div>
+                
+                <div class="newspaper-card" data-category="online">
+                    <div class="newspaper-img">
+                        <img src="https://www.unb.com.bd/favicon.ico" alt="ইউএনবি">
+                    </div>
+                    <div class="newspaper-info">
+                        <h3>ইউএনবি</h3>
+                        <p>অনলাইন নিউজ পোর্টাল</p>
+                        <a href="https://www.unb.com.bd/" class="visit-btn" target="_blank">ভিজিট করুন</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>সম্পর্কে</h3>
+                    <p>বাংলাদেশের সকল সংবাদপত্র এক ঠিকানায়। আমরা বাংলাদেশের সকল প্রধান সংবাদপত্রের লিংক প্রদান করি যাতে ব্যবহারকারীরা সহজেই তাদের পছন্দের সংবাদপত্রে প্রবেশ করতে পারেন।</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>দ্রুত লিংক</h3>
+                    <ul>
+                        <li><a href="#">হোম</a></li>
+                        <li><a href="#">দৈনিক সংবাদপত্র</a></li>
+                        <li><a href="#">অনলাইন সংবাদপত্র</a></li>
+                        <li><a href="#">সাপ্তাহিক পত্রিকা</a></li>
+                        <li><a href="#">যোগাযোগ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>যোগাযোগ</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> info@bangladeshnewspaper.com</li>
+                        <li><i class="fas fa-phone"></i> +880 1234 567890</li>
+                        <li><i class="fas fa-map-marker-alt"></i> ঢাকা, বাংলাদেশ</li>
+                    </ul>
+                    
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 বাংলাদেশ সংবাদপত্র ডিরেক্টরি। সকল স্বত্ব সংরক্ষিত।</p>
+            </div>
+            
+            <div class="developer-credit">
+                <p>উন্নয়নে: <a href="#" target="_blank">হাফেজ মাহবুবুর রহমান</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab functionality
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const newspaperCards = document.querySelectorAll('.newspaper-card');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                tabBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                const category = btn.dataset.category;
+                
+                // Filter newspapers
+                newspaperCards.forEach(card => {
+                    if (category === 'all' || card.dataset.category === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Search functionality
+        const searchInput = document.querySelector('.search-box input');
+        searchInput.addEventListener('keyup', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            newspaperCards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                if (title.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
